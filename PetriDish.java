@@ -86,14 +86,14 @@ public class PetriDish {
 
         // find neighbors of current cell
         List<Cell> neighbors = new ArrayList<>();
-        neighbors.add(dish[(row - 1) % dish.length][(col - 1) % dish[0].length]); // northwest
-        neighbors.add(dish[(row - 1) % dish.length][col]); // north
-        neighbors.add(dish[(row - 1) % dish.length][(col + 1) % dish[0].length]); // northeast
-        neighbors.add(dish[row][(col + 1) % dish[0].length]); // east
-        neighbors.add(dish[row][(col - 1) % dish[0].length]); // west
-        neighbors.add(dish[(row + 1) % dish.length][(col - 1) % dish[0].length]); // southwest
-        neighbors.add(dish[(row + 1) % dish.length][col]); // south
-        neighbors.add(dish[(row + 1) % dish.length][(col + 1) % dish[0].length]); // southeast
+        neighbors.add(dish[(row - 1) % (dish.length - 1)][(col - 1) % (dish[0].length - 1)]); // northwest
+        neighbors.add(dish[(row - 1) % (dish.length - 1)][col]); // north
+        neighbors.add(dish[(row - 1) % (dish.length - 1)][(col + 1) % (dish[0].length - 1)]); // northeast
+        neighbors.add(dish[row][(col + 1) % (dish[0].length - 1)]); // east
+        neighbors.add(dish[row][(col - 1) % (dish[0].length - 1)]); // west
+        neighbors.add(dish[(row + 1) % (dish.length - 1)][(col - 1) % (dish[0].length - 1)]); // southwest
+        neighbors.add(dish[(row + 1) % (dish.length - 1)][col]); // south
+        neighbors.add(dish[(row + 1) % (dish.length - 1)][(col + 1) % (dish[0].length - 1)]); // southeast
 
         return neighbors;
     }
@@ -317,5 +317,6 @@ public class PetriDish {
             pos[1] = 0;
         }
     }
+         
 }
 
