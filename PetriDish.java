@@ -122,7 +122,7 @@ public class PetriDish {
 
             handleWrap(pos);
             int newRow = pos[0];
-            int newCol = pos[0];
+            int newCol = pos[1];
 
             // Decide what to do next
             if(next[newRow][newCol] == null) {
@@ -163,9 +163,9 @@ public class PetriDish {
             }
         }
 
-        // Go through movableToRemove and remove each house in that list from movables
+        // Go through movableToRemove and remove each cell in that list from movables
         for (Movable cell : movablesToRemove) {
-            // remove each house
+            // remove each cell
             movables.remove(cell);
         }
 
@@ -173,9 +173,9 @@ public class PetriDish {
         for (int i = 0; i < ties.length; i++) {
             for (int j = 0; j < ties[0].length; j++) {
                 if (ties[i][j]) {
-                    // Remove that house from movables
+                    // Remove that cell from movables
                     movables.remove((Movable)next[i][j]);
-                    // Overthrow the house
+                    // Overthrow the cell
                     next[i][j].apoptosis();
                     // Set that position to be null
                     next[i][j] = null;
