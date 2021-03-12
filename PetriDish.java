@@ -242,8 +242,8 @@ public class PetriDish {
             for (int c = 0; c < dish[0].length; c++) {
             // copy over from next if conditions are right
                 if (next[r][c] != null && !ties[r][c]) {
-                    dish[r][c] = next[r][c];
-                    divisibles.add((Divisible)dish[r][c]);
+                    dish[r][c] = next[r][c]; // update instance field from dish
+                    divisibles.add((Divisible)dish[r][c]); // update divisibles
                 }
             }
         }
@@ -258,9 +258,6 @@ public class PetriDish {
 
         // initializes movables
         movables = new ArrayList<>();
-
-        // initializes divisibles
-        divisibles = new ArrayList<>();
 
         // Step 1: Loop through dish and get cell at each row & col (cell can be null)
         for (int i = 0; i < dish.length; i++) {
@@ -284,11 +281,6 @@ public class PetriDish {
                 // check if cell is an instanceof Movable
                 if (next[i][j] instanceof Movable) {
                     movables.add((Movable)next[i][j]);
-                }
-
-                // check if cell is an instanceof Divisible
-                if (next[i][j] instanceof Divisible) {
-                    divisibles.add((Divisible)next[i][j]);
                 }
             }
         }
