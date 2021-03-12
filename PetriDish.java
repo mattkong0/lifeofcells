@@ -2,7 +2,7 @@
  * Name: Matthew Kong
  * ID: A16660796
  * Email: mkong@ucsd.edu
- * Sources used: none
+ * Sources used: Piazza
  * 
  * This file contains all of the cells growing on the petridish.
  * This file fills the petridish with a variety of cells.
@@ -101,6 +101,9 @@ public class PetriDish {
     // move all cells in petridish based on each cell's getMove() behavior
     public void move() {
 
+        // initialize movables
+        movables = new ArrayList<>();
+
         // stores state of dish as cells move
         Cell[][] next = new Cell[dish.length][dish[0].length];
 
@@ -185,7 +188,14 @@ public class PetriDish {
     // "divide" all cells in petridish based on 
     // each cell's getDivision() behvaior
     public void divide() {
+
+        // initialize divisibles
+        divisibles = new ArrayList<>();
+
+        // stores state of dish as cells divide
         Cell[][] next = new Cell[dish.length][dish[0].length];
+
+        // stores ties at dish
         boolean[][] ties = new boolean[dish.length][dish[0].length];
 
         // Step 1: Divide
@@ -229,8 +239,15 @@ public class PetriDish {
     // Simultaneously initiate apoptosis for all eligible cells and 
     // spawn new cells for eligible empty spaces
     public void update() {
+
+        // stores state of dish
         Cell[][] next = new Cell[dish.length][dish[0].length];
+
+        // initializes movables
         movables = new ArrayList<>();
+
+        // initializes divisibles
+        divisibles = new ArrayList<>();
 
         // Step 1: Loop through dish and get cell at each row & col (cell can be null)
         for (int i = 0; i < dish.length; i++) {
@@ -240,6 +257,7 @@ public class PetriDish {
 
                 // cells going into apoptosis
                 if (dish[i][j].checkApoptosis(neighbors)) {
+                    dish[i][j].apoptosis();
                     dish[i][j] = null;
                 }
 
@@ -248,6 +266,16 @@ public class PetriDish {
                     if (neighbors.size() == 2 || neighbors.size() == 3) {
                         next[i][j] = getNeighborsOf(i, j).get(0).newCellCopy();
                     }
+                }
+
+                // check if cell is an instanceof Movable
+                if (next[i][j] instanceof Movable) {
+                    movables.add((Movable)next[i][j]);
+                }
+
+                // check if cell is an instanceof Divisible
+                if (next[i][j] instanceof Divisible) {
+                    divisibles.add((Divisible)next[i][j]);
                 }
             }
         }
