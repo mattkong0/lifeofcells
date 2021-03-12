@@ -66,13 +66,11 @@ public class CellMoveDiagonal extends CellMoveUp{
     // this method returns true or false if toggle
     public int[] getMove() {
 
-        // increment diagonalMoves
-        diagonalMoves += 1;
-
         // updates position of cell
         if (orientedRight) {
             super.getMove(); // move up one row
             currCol += 1; // move right
+            diagonalMoves += 1; // increment diagonalMoves
             if ((diagonalMoves + 4) % 4 == 0) {// check if number of moves is a
                                                // multiple of 4
                 orientedRight = false; // update orientation
@@ -81,6 +79,7 @@ public class CellMoveDiagonal extends CellMoveUp{
         else {
             super.getMove(); // move up one row
             currCol -= 1; // move left
+            diagonalMoves += 1; // increment diagonalMoves
             if ((diagonalMoves + 4) % 4 == 0) {// check if number of moves is a
                                                // multiple of 4
                 orientedRight = true; // update orientation
@@ -92,3 +91,4 @@ public class CellMoveDiagonal extends CellMoveUp{
     }
     
 }
+
