@@ -210,9 +210,9 @@ public class PetriDish {
         // Step 1: Divide
         // Loop through instance field divisibles
         for (int i = 0; i < divisibles.size(); i++) {
-            Divisible newCell = divisibles.get(i);
+            Cell newCell = (Cell)divisibles.get(i);
             // get location of where we are dividing
-            int[] pos = newCell.getDivision();
+            int[] pos = ((Divisible)newCell).getDivision();
             // handle wrapping
             handleWrap(pos);
             // get r & c of the position they are dividing
@@ -222,15 +222,15 @@ public class PetriDish {
             // get a cell that has potentially divided to this spot
             Cell oldCell = next[r][c];
             if (dish[r][c] == null && (oldCell == null || 
-                                      ((Cell)newCell).compareTo(oldCell) > 0)) {
-                next[r][c] = ((Cell)newCell).newCellCopy(); // makes new copy
+                                       newCell.compareTo(oldCell) > 0)) {
+                next[r][c] = newCell.newCellCopy(); // makes new copy
                 next[r][c].updatePosition(pos); // update position of new cell
                 ties[r][c] = false; 
             }
             else if (oldCell != null && 
-                    ((Cell)newCell).compareTo(oldCell) == 0) {
+                     newCell.compareTo(oldCell) == 0) {
                 ties[r][c] = true;
-                ((Cell)newCell).apoptosis(); // Call apoptosis
+                newCell.apoptosis(); // Call apoptosis
                 next[r][c] = null; // set location of dish to be empty
             }
         }
@@ -326,6 +326,3 @@ public class PetriDish {
     }
          
 }
-
-
-
