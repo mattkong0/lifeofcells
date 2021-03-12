@@ -36,18 +36,21 @@ public class PetriDish {
             for (int j = 0; j < board[i].length; j++) {
                 String input = board[i][j];
 
-                // check for null strings
-                if (input == null) {
-                    continue;
-                }
-
                 // split input from board
                 String [] boardInfo = input.strip().split(" ");
+
+                // check for null strings
+                if (boardInfo == null || 
+                    boardInfo.length == 1 || 
+                    boardInfo.length == 0) {
+                    continue;
+                }
 
                 // get info from string
                 String boardType = boardInfo[0];
 
                 // get position of cell from the string
+                System.out.println(boardInfo[0].toString());
                 int mass = Integer.parseInt(boardInfo[1]);
 
                 // cases
@@ -121,8 +124,8 @@ public class PetriDish {
         for (int i = 0; i < movables.size(); i++) {
 
             // get cells new position and wrap new position
-            Movable cell = movables.get(i);
-            int[] pos = cell.getMove();
+            Cell cell = (Cell)movables.get(i);
+            int[] pos = ((Movable)cell).getMove();
 
             handleWrap(pos);
             int newRow = pos[0];
@@ -132,41 +135,41 @@ public class PetriDish {
             if(next[newRow][newCol] == null) {
                 // No cell on their new position
                 // Put the cell there
-                next[newRow][newCol] = (Cell)cell;
+                next[newRow][newCol] = cell;
                 // update position
-                ((Cell)cell).updatePosition(pos);
+                cell.updatePosition(pos);
             }
-            else if (((Cell)cell).compareTo(next[newRow][newCol]) > 0) {
+            else if (cell.compareTo(next[newRow][newCol]) > 0) {
                 // If there is a cell2 at that position and cell2 has a smaller mass
                 // Check if cell at that position is instanceof Movable
                 if (!(cell instanceof Movable)) {
-                    ((Cell)cell).apoptosis();
+                    cell.apoptosis();
                     next[newRow][newCol] = null;
                 }
                   // add cell2 to movablesToRemove
                   movablesToRemove.add((Movable)next[newRow][newCol]);
                   // Put the cell there
-                  next[newRow][newCol] = (Cell)cell;
+                  next[newRow][newCol] = cell;
                   // update position
-                  ((Cell)cell).updatePosition(pos);
+                  cell.updatePosition(pos);
             }
-            else if (((Cell)cell).compareTo(next[newRow][newCol]) == 0) {
+            else if (cell.compareTo(next[newRow][newCol]) == 0) {
                 // If there is a cell2 there and they have the same mass
                   // Set ties to true
                   ties[newRow][newCol] = true;
                   // Call apoptosis
-                  ((Cell)cell).apoptosis();
+                  cell.apoptosis();
                   // set location to null
                   next[newRow][newCol] = null;
                   // Add cell to movableToRemove
-                  movablesToRemove.add(cell);
+                  movablesToRemove.add((Movable)cell);
             }
             else {
                 // If there is a cell2 there and cell2 has a larger mass
                   // Check for apoptosis
-                  ((Cell)cell).apoptosis();
+                  cell.apoptosis();
                   // Add cell to movableToRemove
-                  movablesToRemove.add(cell);
+                  movablesToRemove.add((Movable)cell);
             }
         }
 
