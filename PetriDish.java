@@ -86,14 +86,18 @@ public class PetriDish {
 
         // find neighbors of current cell
         List<Cell> neighbors = new ArrayList<>();
-        neighbors.add(dish[(row - 1) % (dish.length - 1)][(col - 1) % (dish[0].length - 1)]); // northwest
+        neighbors.add(dish[(row - 1) % (dish.length - 1)]
+                          [(col - 1) % (dish[0].length - 1)]); // northwest
         neighbors.add(dish[(row - 1) % (dish.length - 1)][col]); // north
-        neighbors.add(dish[(row - 1) % (dish.length - 1)][(col + 1) % (dish[0].length - 1)]); // northeast
+        neighbors.add(dish[(row - 1) % (dish.length - 1)]
+                          [(col + 1) % (dish[0].length - 1)]); // northeast
         neighbors.add(dish[row][(col + 1) % (dish[0].length - 1)]); // east
         neighbors.add(dish[row][(col - 1) % (dish[0].length - 1)]); // west
-        neighbors.add(dish[(row + 1) % (dish.length - 1)][(col - 1) % (dish[0].length - 1)]); // southwest
+        neighbors.add(dish[(row + 1) % (dish.length - 1)]
+                          [(col - 1) % (dish[0].length - 1)]); // southwest
         neighbors.add(dish[(row + 1) % (dish.length - 1)][col]); // south
-        neighbors.add(dish[(row + 1) % (dish.length - 1)][(col + 1) % (dish[0].length - 1)]); // southeast
+        neighbors.add(dish[(row + 1) % (dish.length - 1)]
+                          [(col + 1) % (dish[0].length - 1)]); // southeast
 
         return neighbors;
     }
@@ -134,9 +138,10 @@ public class PetriDish {
             }
             else if (((Cell)cell).compareTo(next[newRow][newCol]) > 0) {
                 // If there is a cell2 at that position and cell2 has a smaller mass
-                // Check if cell is instanceof Movable
+                // Check if cell at that position is instanceof Movable
                 if (!(cell instanceof Movable)) {
                     ((Cell)cell).apoptosis();
+                    next[newRow][newCol] = null;
                 }
                   // add cell2 to movablesToRemove
                   movablesToRemove.add((Movable)next[newRow][newCol]);
@@ -152,7 +157,7 @@ public class PetriDish {
                   // Call apoptosis
                   ((Cell)cell).apoptosis();
                   // set location to null
-                  dish[newRow][newCol] = null;
+                  next[newRow][newCol] = null;
                   // Add cell to movableToRemove
                   movablesToRemove.add(cell);
             }
@@ -224,7 +229,7 @@ public class PetriDish {
                     ((Cell)newCell).compareTo(oldCell) == 0) {
                 ties[r][c] = true;
                 ((Cell)newCell).apoptosis(); // Call apoptosis
-                dish[r][c] = null; // set location of dish to be empty
+                next[r][c] = null; // set location of dish to be empty
             }
         }
 
@@ -262,7 +267,7 @@ public class PetriDish {
                 // cells going into apoptosis
                 if (dish[i][j].checkApoptosis(neighbors)) {
                     dish[i][j].apoptosis();
-                    dish[i][j] = null;
+                    next[i][j] = null;
                 }
 
                 // check if space is empty
@@ -319,4 +324,6 @@ public class PetriDish {
     }
          
 }
+
+
 
