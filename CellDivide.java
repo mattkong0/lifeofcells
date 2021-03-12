@@ -1,4 +1,3 @@
-
 /**
  * Name: Matthew Kong
  * ID: A16660796
@@ -36,6 +35,7 @@ public class CellDivide extends Cell implements Divisible{
 
         // fill out copy constructor
         super(otherCellDivide);
+        this.direction = otherCellDivide.direction;
     }
 
     // returns string representation of CellDivide
