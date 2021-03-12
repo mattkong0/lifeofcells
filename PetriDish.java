@@ -2,7 +2,7 @@
  * Name: Matthew Kong
  * ID: A16660796
  * Email: mkong@ucsd.edu
- * Sources used: Piazza
+ * Sources used: Piazza, tutors
  * 
  * This file contains all of the cells growing on the petridish.
  * This file fills the petridish with a variety of cells.
@@ -50,7 +50,6 @@ public class PetriDish {
                 String boardType = boardInfo[0];
 
                 // get position of cell from the string
-                System.out.println(boardInfo[0].toString());
                 int mass = Integer.parseInt(boardInfo[1]);
 
                 // cases
