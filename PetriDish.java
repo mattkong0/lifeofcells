@@ -230,7 +230,7 @@ public class PetriDish {
             else if (oldCell != null && 
                      newCell.compareTo(oldCell) == 0) {
                 ties[r][c] = true;
-                newCell.apoptosis(); // Call apoptosis
+                next[r][c].apoptosis(); // Call apoptosis
                 next[r][c] = null; // set location of dish to be empty
             }
         }
@@ -268,7 +268,7 @@ public class PetriDish {
 
                 // cells going into apoptosis
                 if (dish[i][j].checkApoptosis(neighbors)) {
-                    dish[i][j].apoptosis();
+                    next[i][j].apoptosis();
                     next[i][j] = null;
                 }
 
