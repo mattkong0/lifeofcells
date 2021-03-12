@@ -72,7 +72,7 @@ public class CellMoveDiagonal extends CellMoveUp{
         // updates position of cell
         if (orientedRight) {
             super.getMove(); // move up one row
-            currCol += 1; // 
+            currCol += 1; // move right
             if ((diagonalMoves + 4) % 4 == 0) {// check if number of moves is a
                                                // multiple of 4
                 orientedRight = false; // update orientation
