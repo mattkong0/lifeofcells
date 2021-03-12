@@ -65,7 +65,7 @@ public class CellMoveToggleChild extends CellMoveToggle{
     // this method should not override super's method
     public int[] getMove() {
 
-        // return position of the cell
-        return new int[] {currRow - 1, currCol};
+        // call super's method
+        return super.getMove();
     }
 }
