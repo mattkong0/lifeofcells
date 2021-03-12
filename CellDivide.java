@@ -2,7 +2,7 @@
  * Name: Matthew Kong
  * ID: A16660796
  * Email: mkong@ucsd.edu
- * Sources used: zybook
+ * Sources used: zybook, piazza
  * 
  * This file is a subclass of Cell.
  * This file has a string representation of "+".
@@ -66,16 +66,16 @@ public class CellDivide extends Cell implements Divisible{
         direction += 1;
 
         // cases for each direction
-        if (direction == 0) {// down
+        if (direction == 1) {// down
             currRow += 1;
         }
-        if (direction == 1) {// up
+        if (direction == 2) {// up
             currRow -= 1;
         }
-        if (direction == 2) {// left
+        if (direction == 3) {// left
             currCol -= 1;
         }
-        if (direction == 3) {// right
+        if (direction == 4) {// right
             direction = 0;
             currCol += 1;
         }
