@@ -117,9 +117,6 @@ public class PetriDish {
     // move all cells in petridish based on each cell's getMove() behavior
     public void move() {
 
-        // initialize movables
-        movables = new ArrayList<>();
-
         // stores state of dish as cells move
         Cell[][] next = new Cell[dish.length][dish[0].length];
 
@@ -207,9 +204,6 @@ public class PetriDish {
     // "divide" all cells in petridish based on 
     // each cell's getDivision() behvaior
     public void divide() {
-
-        // initialize divisibles
-        divisibles = new ArrayList<>();
 
         // stores state of dish as cells divide
         Cell[][] next = new Cell[dish.length][dish[0].length];
