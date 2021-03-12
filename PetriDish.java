@@ -149,8 +149,10 @@ public class PetriDish {
                 // If there is a cell2 there and they have the same mass
                   // Set ties to true
                   ties[newRow][newCol] = true;
-                  // Check for apoptosis
+                  // Call apoptosis
                   ((Cell)cell).apoptosis();
+                  // set location to null
+                  dish[newRow][newCol] = null;
                   // Add cell to movableToRemove
                   movablesToRemove.add(cell);
             }
@@ -214,13 +216,15 @@ public class PetriDish {
             Cell oldCell = next[r][c];
             if (dish[r][c] == null && (oldCell == null || 
                                       ((Cell)newCell).compareTo(oldCell) > 0)) {
-                next[r][c] = ((Cell)newCell).newCellCopy();
-                next[r][c].updatePosition(pos);
-                ties[r][c] = false;
+                next[r][c] = ((Cell)newCell).newCellCopy(); // makes new copy
+                next[r][c].updatePosition(pos); // update position of new cell
+                ties[r][c] = false; 
             }
             else if (oldCell != null && 
                     ((Cell)newCell).compareTo(oldCell) == 0) {
                 ties[r][c] = true;
+                ((Cell)newCell).apoptosis(); // Call apoptosis
+                dish[r][c] = null; // set location of dish to be empty
             }
         }
 
