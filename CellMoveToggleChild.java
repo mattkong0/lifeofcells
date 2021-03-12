@@ -66,6 +66,6 @@ public class CellMoveToggleChild extends CellMoveToggle{
     public int[] getMove() {
 
         // return position of the cell
-        return new int[] {currRow, currCol};
+        return new int[] {currRow - 1, currCol};
     }
 }
