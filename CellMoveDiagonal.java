@@ -37,6 +37,8 @@ public class CellMoveDiagonal extends CellMoveUp{
 
         // fill out copy constructor
         super(otherCellMoveDiagonal);
+        this.orientedRight = otherCellMoveDiagonal.orientedRight;
+        this.diagonalMoves = otherCellMoveDiagonal.diagonalMoves;
     }
 
     // returns string representation of CellMoveDiagonal depending on condition
