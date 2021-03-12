@@ -73,6 +73,16 @@ public class PetriDish {
                         dish[i][j] = new CellMoveToggleChild(i, j, mass);
                         break;
                 }
+
+                // check if cell is an instanceof Movable
+                if (dish[i][j] instanceof Movable) {
+                    movables.add((Movable)dish[i][j]);
+                }
+
+                // check if cell is an instanceof Divisible
+                if (dish[i][j] instanceof Divisible) {
+                    divisibles.add((Divisible)dish[i][j]);
+                }
             }
         }
     }
@@ -123,7 +133,7 @@ public class PetriDish {
         for (int i = 0; i < movables.size(); i++) {
 
             // get cells new position and wrap new position
-            Cell cell = (Cell)movables.get(i);
+            Cell cell = (Cell)(movables.get(i));
             int[] pos = ((Movable)cell).getMove();
 
             handleWrap(pos);
@@ -210,7 +220,7 @@ public class PetriDish {
         // Step 1: Divide
         // Loop through instance field divisibles
         for (int i = 0; i < divisibles.size(); i++) {
-            Cell newCell = (Cell)divisibles.get(i);
+            Cell newCell = (Cell)(divisibles.get(i));
             // get location of where we are dividing
             int[] pos = ((Divisible)newCell).getDivision();
             // handle wrapping
@@ -230,8 +240,6 @@ public class PetriDish {
             else if (oldCell != null && 
                      newCell.compareTo(oldCell) == 0) {
                 ties[r][c] = true;
-                next[r][c].apoptosis(); // Call apoptosis
-                next[r][c] = null; // set location of dish to be empty
             }
         }
 
@@ -268,12 +276,12 @@ public class PetriDish {
 
                 // cells going into apoptosis
                 if (dish[i][j].checkApoptosis(neighbors)) {
-                    next[i][j].apoptosis();
+                    dish[i][j].apoptosis();
                     next[i][j] = null;
                 }
 
                 // check if space is empty
-                if (dish[i][j] == null) {
+                if (next[i][j] == null) {
                     if (neighbors.size() == 2 || neighbors.size() == 3) {
                         next[i][j] = getNeighborsOf(i, j).get(0).newCellCopy();
                     }
