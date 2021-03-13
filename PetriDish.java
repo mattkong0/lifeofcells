@@ -10,7 +10,6 @@
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * This class contains a board that holds 
@@ -28,6 +27,10 @@ public class PetriDish {
 
     // Constructor for Petridish
     public PetriDish(String[][] board) {
+
+        // initialize movables and divisibles
+        movables = new ArrayList<>();
+        divisibles = new ArrayList<>();
 
         // setup 2d array
         dish = new Cell[board.length][board[0].length];
@@ -164,9 +167,9 @@ public class PetriDish {
                 cell.updatePosition(pos);
             }
             else if (cell.compareTo(next[newRow][newCol]) > 0) {
-                // If there is a cell2 at that position and cell2 has a smaller mass
-                // Check if cell at that position is instanceof Movable
-                if (!(next[newRow][newCol] instanceof Movable)) {
+                // If there is a cell2 at that position and 
+                // cell2 has a smaller mass
+                if (!(next[newRow][newCol] instanceof Movable)) {// not movable
                     next[newRow][newCol].apoptosis();
                     next[newRow][newCol] = null;
                 }
