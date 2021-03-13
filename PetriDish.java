@@ -120,38 +120,18 @@ public class PetriDish {
 
         // find neighbors of current cell
         List<Cell> neighbors = new ArrayList<>();
-        if (dish[(row - 1 + dish.length) % dish.length]
-        [(col - 1 + dish[0].length) % dish[0].length] != null) {
-            neighbors.add(dish[(row - 1 + dish.length) % dish.length]
-                          [(col - 1 + dish[0].length) % dish[0].length]); // northwest
-        }
-        if (dish[(row - 1 + dish.length) % (dish.length)][col] != null) {
-            neighbors.add(dish[(row - 1 + dish.length) % 
-                               (dish.length)][col]); // north
-        }
-        if (dish[(row - 1 + dish.length) % dish.length]
-        [(col + 1 + dish[0].length) % dish[0].length] != null) {
-            neighbors.add(dish[(row - 1 + dish.length) % dish.length]
-                          [(col + 1 + dish[0].length) % dish[0].length]); // northeast
-        }
-        if (dish[row][(col + 1 + dish[0].length) % dish[0].length] != null) {
-            neighbors.add(dish[row][(col + 1 + dish[0].length) % dish[0].length]); // east
-        }
-        if (dish[row][(col - 1 + dish[0].length) % dish[0].length - 1] != null) {
-            neighbors.add(dish[row][(col - 1 + dish[0].length) % dish[0].length - 1]); // west
-        }
-        if (dish[(row + 1 + dish.length - 1) % dish.length]
-        [(col - 1 + dish[0].length) % dish[0].length] != null) {
-            neighbors.add(dish[(row + 1 + dish.length - 1) % dish.length]
-                          [(col - 1 + dish[0].length) % dish[0].length]); // southwest
-        }
-        if (dish[(row + 1 + dish.length) % dish.length][col] != null) {
-            neighbors.add(dish[(row + 1 + dish.length) % dish.length][col]); // south
-        }
-        if (dish[(row + 1 + dish.length) % dish.length]
-        [(col + 1 + dish[0].length) % dish[0].length] != null) {
-            neighbors.add(dish[(row + 1 + dish.length) % dish.length]
-                          [(col + 1 + dish[0].length) % dish[0].length]); // southeast
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 1 && j == 1) {
+                    continue;
+                }
+                Cell neighbor = dish[(row + i + dish.length) % dish.length]
+                                    [(col + j + dish[0].length) % 
+                                      dish[0].length];
+                if (neighbor != null) {
+                    neighbors.add(neighbor);
+                }
+            }
         }
 
         return neighbors;
@@ -330,7 +310,7 @@ public class PetriDish {
                 }
 
                 // check if space is empty
-                else if (next[i][j] == null) {
+                else if (dish[i][j] == null) {
                     if (neighbors.size() == 2 || neighbors.size() == 3) {
                         next[i][j] = neighbors.get(0).newCellCopy();
                     }
