@@ -299,7 +299,7 @@ public class PetriDish {
                 List<Cell> neighbors = getNeighborsOf(i, j);
 
                 // cells going into apoptosis
-                if (dish[i][j] == null && 
+                if (dish[i][j] != null && 
                     dish[i][j].checkApoptosis(neighbors)) {
                     dish[i][j].apoptosis();
                     next[i][j] = null;
