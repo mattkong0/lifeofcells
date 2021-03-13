@@ -218,19 +218,22 @@ public class PetriDish {
             movables.remove(curCell);
         }
 
-        // // Look at each tie
-        // for (int i = 0; i < ties.length; i++) {
-        //     for (int j = 0; j < ties[0].length; j++) {
-        //         if (ties[i][j]) {
-        //             // Remove that cell from movables
-        //             movables.remove((Movable)next[i][j]);
-        //             // Overthrow the cell
-        //             next[i][j].apoptosis();
-        //             // Set that position to be null
-        //             next[i][j] = null;
-        //         }
-        //     }
-        // }
+        // Look at each tie
+        for (int i = 0; i < ties.length; i++) {
+            for (int j = 0; j < ties[0].length; j++) {
+                if (ties[i][j]) {
+                    // Remove that cell from movables
+                    movables.remove((Movable)next[i][j]);
+                    // Overthrow the cell
+                    next[i][j].apoptosis();
+                    // Set that position to be null
+                    next[i][j] = null;
+                }
+            }
+        }
+
+        // Step 2: Once everything has been updated set dish to be the new update array next
+        dish = next;
 
     }
 
