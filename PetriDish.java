@@ -166,6 +166,10 @@ public class PetriDish {
             int newRow = pos[0];
             int newCol = pos[1];
 
+            if (!(cell instanceof Movable)) {// not movable
+                cell.apoptosis();
+            }
+
             // Decide what to do next
             if(next[newRow][newCol] == null) {
                 // No cell on their new position
@@ -173,9 +177,6 @@ public class PetriDish {
                 next[newRow][newCol] = cell;
                 // update position
                 cell.updatePosition(pos);
-            }
-            if (!(cell instanceof Movable)) {// not movable
-                cell.apoptosis();
             }
             else if (cell.compareTo(next[newRow][newCol]) > 0) {
                 // If there is a cell2 at that position and 
