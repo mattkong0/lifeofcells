@@ -10,6 +10,7 @@
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class contains a board that holds 
@@ -80,12 +81,29 @@ public class PetriDish {
                 }
 
                 // check if cell is an instanceof Divisible
-                if (dish[i][j] instanceof Divisible) {
+                else if (dish[i][j] instanceof Divisible) {
                     divisibles.add((Divisible)dish[i][j]);
                 }
             }
         }
     }
+
+    // print dish to visualize PetriDish
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(2 * dish.length + 3); //display the dish nicely 
+        for(int i = 0; i < dish.length; i++){
+            sb.append("|");
+            for(int j = 0; j < dish[0].length; j++){
+                sb.append(dish[i][j] == null ? " " : dish[i][j].toString());
+                sb.append("|"); 
+            }
+            sb.append("\n");
+            sb.append(2 * dish.length + 3); 
+        }
+        return sb.toString(); 
+    }
+         
 
     // NEW CODE for PA8
     // return list of cells neighboring input location
@@ -148,8 +166,8 @@ public class PetriDish {
             else if (cell.compareTo(next[newRow][newCol]) > 0) {
                 // If there is a cell2 at that position and cell2 has a smaller mass
                 // Check if cell at that position is instanceof Movable
-                if (!(cell instanceof Movable)) {
-                    cell.apoptosis();
+                if (!(next[newRow][newCol] instanceof Movable)) {
+                    next[newRow][newCol].apoptosis();
                     next[newRow][newCol] = null;
                 }
                   // add cell2 to movablesToRemove
