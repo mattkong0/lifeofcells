@@ -292,9 +292,6 @@ public class PetriDish {
         // stores state of dish
         Cell[][] next = new Cell[dish.length][dish[0].length];
 
-        // initializes movables
-        movables = new ArrayList<>();
-
         // Step 1: Loop through dish and get cell at each row & col (cell can be null)
         for (int i = 0; i < dish.length; i++) {
             for (int j = 0; j < dish[0].length; j++) {
@@ -302,7 +299,8 @@ public class PetriDish {
                 List<Cell> neighbors = getNeighborsOf(i, j);
 
                 // cells going into apoptosis
-                if (dish[i][j].checkApoptosis(neighbors)) {
+                if (dish[i][j] == null && 
+                    dish[i][j].checkApoptosis(neighbors)) {
                     dish[i][j].apoptosis();
                     next[i][j] = null;
                 }
