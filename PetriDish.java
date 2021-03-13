@@ -159,8 +159,8 @@ public class PetriDish {
         for (int i = 0; i < movables.size(); i++) {
 
             // get cells new position and wrap new position
-            Cell cell = (Cell)(movables.get(i));
-            int[] pos = ((Movable)cell).getMove();
+            Cell curCell = (Cell)(movables.get(i));
+            int[] pos = ((Movable)curCell).getMove();
 
             handleWrap(pos);
             int newRow = pos[0];
@@ -170,9 +170,9 @@ public class PetriDish {
             if(next[newRow][newCol] == null) {
                 // No cell on their new position
                 // Put the cell there
-                next[newRow][newCol] = cell;
+                next[newRow][newCol] = curCell;
                 // update position
-                cell.updatePosition(pos);
+                curCell.updatePosition(pos);
             }
             else if (curCell.compareTo(next[newRow][newCol]) > 0 || 
                      !(next[newRow][newCol] instanceof Movable)) {
@@ -187,24 +187,24 @@ public class PetriDish {
                   // update position
                   curCell.updatePosition(pos);
             }
-            else if (cell.compareTo(next[newRow][newCol]) == 0) {
+            else if (curCell.compareTo(next[newRow][newCol]) == 0) {
                 // If there is a cell2 there and they have the same mass
                   // Set ties to true
                   ties[newRow][newCol] = true;
                   // Call apoptosis
                   next[newRow][newCol].apoptosis();
-                  cell.apoptosis();
+                  curCell.apoptosis();
                   // set location to null
                   next[newRow][newCol] = null;
                   // Add cell to movableToRemove
-                  movablesToRemove.add((Movable)cell);
+                  movablesToRemove.add((Movable)curCell);
             }
             else {
                 // If there is a cell2 there and cell2 has a larger mass
                   // Check for apoptosis
-                  cell.apoptosis();
+                  curCell.apoptosis();
                   // Add cell to movableToRemove
-                  movablesToRemove.add((Movable)cell);
+                  movablesToRemove.add((Movable)curCell);
             }
         }
 
@@ -347,5 +347,6 @@ public class PetriDish {
             pos[1] = 0;
         }
     }
-         
+           
 }
+
