@@ -175,7 +175,7 @@ public class PetriDish {
                 curCell.updatePosition(pos);
             }
             else if (curCell.compareTo(next[newRow][newCol]) > 0 || 
-                     !(next[newRow][newCol] instanceof Movable)) {
+                     !(dish[newRow][newCol] instanceof Movable)) {
                 // If there is a cell2 at that position and 
                 // cell2 has a smaller mass
                   // add cell2 to movablesToRemove
