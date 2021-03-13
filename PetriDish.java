@@ -177,13 +177,13 @@ public class PetriDish {
             else if (cell.compareTo(next[newRow][newCol]) > 0) {
                 // If there is a cell2 at that position and 
                 // cell2 has a smaller mass
-                if (!(cell instanceof Movable) && cell != null) {// not movable
-                    cell.apoptosis();
-                }
                   // add cell2 to movablesToRemove
                   movablesToRemove.add((Movable)next[newRow][newCol]);
                   // Put the cell there
                   next[newRow][newCol] = cell;
+                  if (!(cell instanceof Movable) && cell != null) {// not movable
+                    cell.apoptosis();
+                  }
                   // update position
                   cell.updatePosition(pos);
             }
