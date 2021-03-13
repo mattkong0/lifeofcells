@@ -295,6 +295,9 @@ public class PetriDish {
         // create new movables list
         movables = new ArrayList<>();
 
+        // create new divisibles
+        divisibles = new ArrayList<>();
+
         // Step 1: Loop through dish and get cell at each row & col (cell can be null)
         for (int i = 0; i < dish.length; i++) {
             for (int j = 0; j < dish[0].length; j++) {
