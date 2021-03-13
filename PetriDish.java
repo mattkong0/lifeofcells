@@ -10,6 +10,7 @@
 
 import java.util.List;
 import java.util.ArrayList;
+// import java.util.Scanner;
 
 /**
  * This class contains a board that holds 
@@ -175,11 +176,13 @@ public class PetriDish {
                 curCell.updatePosition(pos);
             }
             else if (curCell.compareTo(next[newRow][newCol]) > 0 || 
-                     !(dish[newRow][newCol] instanceof Movable)) {
+                     !(next[newRow][newCol] instanceof Movable)) {
                 // If there is a cell2 at that position and 
                 // cell2 has a smaller mass
                   // add cell2 to movablesToRemove
-                  movablesToRemove.add((Movable)next[newRow][newCol]);
+                  if (next[newRow][newCol] instanceof Movable) {
+                    movablesToRemove.add((Movable)next[newRow][newCol]);
+                  }
                   // call apoptosis
                   next[newRow][newCol].apoptosis();
                   // Put the cell there
@@ -198,6 +201,7 @@ public class PetriDish {
                   next[newRow][newCol] = null;
                   // Add cell to movableToRemove
                   movablesToRemove.add((Movable)curCell);
+                  movablesToRemove.add((Movable)next[newRow][newCol]);
             }
             else {
                 // If there is a cell2 there and cell2 has a larger mass
@@ -347,6 +351,47 @@ public class PetriDish {
             pos[1] = 0;
         }
     }
+
+    // public void simulate(){
+    //     Scanner sc = new Scanner(System.in); 
+    //     System.out.println(this.toString()); 
+    //     while(sc.hasNextLine()) {
+    //         String line = sc.nextLine(); 
+    //         if(line.equals("e")) {
+    //             break; 
+    //         }
+    //         switch(line) {
+    //             case "CellMove":
+    //                 move();
+    //                 break;
+    //             case "CellDivide":
+    //                 divide();
+    //                 break;
+    //             case "u":
+    //                 update();
+    //                 break;
+    //             case "I":
+    //                 iterate();
+    //                 break; 
+    //             default:
+    //                 System.out.println("d");
+    //                 break; 
+    //         }
+    //     System.out.println(this.toString());
+    //     }
+    //     sc.close(); 
+    // }
+
+    // public static void main(String[] args) {
+    //     String[][] petri = new String[][]{
+    //                                         {"null", "null", "null", "null", "null"},
+    //                                         {"null", "CellStationary 2", "CellDivide 5", "CellStationary 11", "null"},
+    //                                         {"null", "CellMoveDiagonal 4", "CellMoveToggle 3", "CellMoveToggle 10", "CellStationary 4"},
+    //                                         {"null", "null", "CellDivide 2", "CellMoveUp 4", "null"}
+    //                                      };
+    //     PetriDish dish = new PetriDish(petri);
+    //     dish.simulate();
+    // }
            
 }
 
