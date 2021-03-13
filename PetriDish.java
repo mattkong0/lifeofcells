@@ -169,8 +169,8 @@ public class PetriDish {
             else if (cell.compareTo(next[newRow][newCol]) > 0) {
                 // If there is a cell2 at that position and 
                 // cell2 has a smaller mass
-                if (!(next[newRow][newCol] instanceof Movable)) {// not movable
-                    next[newRow][newCol].apoptosis();
+                if (!(cell instanceof Movable)) {// not movable
+                    cell.apoptosis();
                     next[newRow][newCol] = null;
                 }
                   // add cell2 to movablesToRemove
@@ -185,7 +185,7 @@ public class PetriDish {
                   // Set ties to true
                   ties[newRow][newCol] = true;
                   // Call apoptosis
-                  cell.apoptosis();
+                  next[newRow][newCol].apoptosis();
                   // set location to null
                   next[newRow][newCol] = null;
                   // Add cell to movableToRemove
