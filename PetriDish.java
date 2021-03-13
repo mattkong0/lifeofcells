@@ -125,9 +125,8 @@ public class PetriDish {
                 if (i == 1 && j == 1) {
                     continue;
                 }
-                Cell neighbor = dish[(row + i + dish.length) % dish.length]
-                                    [(col + j + dish[0].length) % 
-                                      dish[0].length];
+                Cell neighbor = dish[row + (i % dish.length)]
+                                    [col + (j % dish[0].length)];
                 if (neighbor != null) {
                     neighbors.add(neighbor);
                 }
