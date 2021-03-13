@@ -308,7 +308,6 @@ public class PetriDish {
                 if (dish[i][j] != null && 
                     dish[i][j].checkApoptosis(neighbors)) {
                     dish[i][j].apoptosis();
-                    next[i][j] = null;
                 }
 
                 // check if space is empty
