@@ -213,9 +213,9 @@ public class PetriDish {
         }
 
         // Go through movableToRemove and remove each cell in that list from movables
-        for (Movable cell : movablesToRemove) {
+        for (Movable curCell : movablesToRemove) {
             // remove each cell
-            movables.remove(cell);
+            movables.remove(curCell);
         }
 
         // Look at each tie
