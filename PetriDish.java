@@ -308,6 +308,12 @@ public class PetriDish {
                 if (dish[i][j] != null && 
                     dish[i][j].checkApoptosis(neighbors)) {
                     dish[i][j].apoptosis();
+                    if (dish[i][j] instanceof Movable) {
+                        movables.remove((Movable)dish[i][j]);
+                    }
+                    if (dish[i][j] instanceof Divisible) {
+                        divisibles.remove((Divisible)dish[i][j]);
+                    }
                 }
 
                 // check if space is empty
