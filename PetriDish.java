@@ -181,11 +181,11 @@ public class PetriDish {
                   movablesToRemove.add((Movable)next[newRow][newCol]);
                   // Put the cell there
                   next[newRow][newCol] = cell;
+                  // update position
+                  cell.updatePosition(pos);
                   if (!(cell instanceof Movable) && cell != null) {// not movable
                     cell.apoptosis();
                   }
-                  // update position
-                  cell.updatePosition(pos);
             }
             else if (cell.compareTo(next[newRow][newCol]) == 0) {
                 // If there is a cell2 there and they have the same mass
