@@ -292,6 +292,9 @@ public class PetriDish {
         // stores state of dish
         Cell[][] next = new Cell[dish.length][dish[0].length];
 
+        // create new movables list
+        movables = new ArrayList<>();
+
         // Step 1: Loop through dish and get cell at each row & col (cell can be null)
         for (int i = 0; i < dish.length; i++) {
             for (int j = 0; j < dish[0].length; j++) {
@@ -306,10 +309,14 @@ public class PetriDish {
                 }
 
                 // check if space is empty
-                if (next[i][j] == null) {
+                else if (next[i][j] == null) {
                     if (neighbors.size() == 2 || neighbors.size() == 3) {
-                        next[i][j] = getNeighborsOf(i, j).get(0).newCellCopy();
+                        next[i][j] = neighbors.get(0).newCellCopy();
                     }
+                }
+
+                else {
+                    next[i][j] = dish[i][j]; // duplicate cell
                 }
 
                 // check if cell is an instanceof Movable
