@@ -193,6 +193,7 @@ public class PetriDish {
                   ties[newRow][newCol] = true;
                   // Call apoptosis
                   next[newRow][newCol].apoptosis();
+                  cell.apoptosis();
                   // set location to null
                   next[newRow][newCol] = null;
                   // Add cell to movableToRemove
