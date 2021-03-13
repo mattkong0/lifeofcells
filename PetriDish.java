@@ -174,7 +174,7 @@ public class PetriDish {
                 // update position
                 cell.updatePosition(pos);
             }
-            if (!(cell instanceof Movable)) {// not movable
+            if (!(cell instanceof Movable) && cell != null) {// not movable
                 cell.apoptosis();
             }
             else if (cell.compareTo(next[newRow][newCol]) > 0) {
