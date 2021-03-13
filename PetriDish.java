@@ -331,6 +331,11 @@ public class PetriDish {
                 if (next[i][j] instanceof Movable) {
                     movables.add((Movable)next[i][j]);
                 }
+
+                // check if cell is an instanceof Divisible
+                else if (next[i][j] instanceof Divisible) {
+                    divisibles.add((Divisible)dish[i][j]);
+                }
             }
         }
 
