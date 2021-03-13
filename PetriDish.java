@@ -10,7 +10,6 @@
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * This class contains a board that holds 
@@ -175,13 +174,12 @@ public class PetriDish {
                 // update position
                 cell.updatePosition(pos);
             }
+            if (!(cell instanceof Movable)) {// not movable
+                cell.apoptosis();
+            }
             else if (cell.compareTo(next[newRow][newCol]) > 0) {
                 // If there is a cell2 at that position and 
                 // cell2 has a smaller mass
-                if (!(cell instanceof Movable)) {// not movable
-                    cell.apoptosis();
-                    next[newRow][newCol] = null;
-                }
                   // add cell2 to movablesToRemove
                   movablesToRemove.add((Movable)next[newRow][newCol]);
                   // Put the cell there
