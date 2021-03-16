@@ -122,11 +122,13 @@ public class PetriDish {
         List<Cell> neighbors = new ArrayList<>();
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (i == 1 && j == 1) {
+                if (i == 0 && j == 0) {
                     continue;
                 }
-                Cell neighbor = dish[row + (i % dish.length)]
-                                    [col + (j % dish[0].length)];
+                Cell neighbor = dish[(row + (i % dish.length) + dish.length)
+                                      % dish.length]
+                                    [(col + (j % dish[0].length) + 
+                                      dish[0].length) % dish[0].length];
                 if (neighbor != null) {
                     neighbors.add(neighbor);
                 }
